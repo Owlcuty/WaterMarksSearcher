@@ -1,0 +1,24 @@
+#pragma once
+
+#include "ILogger.h"
+
+#include <iostream>
+#include <mutex>
+
+
+class ConsoleLogger :
+    public ILogger
+{
+public:
+    ConsoleLogger();
+    ConsoleLogger(LogLevel level);
+    ~ConsoleLogger() override;
+
+    void log(ILogger::LogLevel level, const std::string& message) override;
+
+private:
+    LogLevel _level {LogLevel::Info};
+
+    std::mutex logMutex {};
+};
+

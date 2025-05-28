@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\Logger">
+      <UniqueIdentifier>{a3c704a0-49a6-4ba9-9193-df3e8d236b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Logger">
+      <UniqueIdentifier>{14694f52-96a1-444f-bb20-e1a11217564e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\VideoProcessor">
+      <UniqueIdentifier>{3c2d865a-3575-4968-8938-d134c91292fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\VideoProcessor">
+      <UniqueIdentifier>{1a74be40-f60b-4fdb-98b6-94e33b72bb01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleLogger.cpp">
+      <Filter>Исходные файлы\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoProcessorFactory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoProcessorOpenCV.cpp">
+      <Filter>Исходные файлы\VideoProcessor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameHandlerFactory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IWritterFactory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IConfiguartionFactory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IVideoProcessorFactory.h">
+      <Filter>Файлы заголовков\VideoProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoProcessorOpenCV.h">
+      <Filter>Файлы заголовков\VideoProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleLogger.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogger.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrame.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IVideoProcessor.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoProcessorFactory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
