@@ -1,6 +1,8 @@
 #pragma once
 
+#include <source_location>
 #include <string>
+#include <unordered_map>
 #include <cstdint>
 
 
@@ -16,7 +18,14 @@ public:
 	};
 
 	ILogger() = default;
-	virtual ~ILogger() {}
+	virtual ~ILogger() = default;
 
-	virtual void log(LogLevel level, const std::string& message) = 0;
+	virtual void log(LogLevel level, const std::string& message, const std::source_location& location = std::source_location::current()) = 0;
+};
+
+const std::unordered_map<ILogger::LogLevel, std::string> kLogLevelString = {
+	{ILogger::LogLevel::Error, "Error"},
+	{ILogger::LogLevel::Warning, "Warning"},
+	{ILogger::LogLevel::Info, "Info"},
+	{ILogger::LogLevel::Debug, "Debug"}
 };

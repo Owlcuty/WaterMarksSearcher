@@ -72,6 +72,10 @@
     <Import Project="OpenCV_Release.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Libs\OpenCV\build\install\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -113,6 +117,9 @@
       <AdditionalLibraryDirectories>C:\Libs\OpenCV\build\install\x64\vc17\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies);opencv_world4120d.lib;</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y ".\thirdParty\opencv\*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -122,16 +129,22 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Libs\OpenCV\build\install\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opencv_world4120.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ConsoleLogger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenCvFrame.cpp" />
+    <ClCompile Include="SingleMarkFrameHandler.cpp" />
+    <ClCompile Include="SingleMarkFrameHandlerFactory.cpp" />
+    <ClCompile Include="SingleMarkOpenCv.cpp" />
     <ClCompile Include="VideoProcessorOpenCV.cpp" />
     <ClCompile Include="VideoProcessorFactory.cpp" />
   </ItemGroup>
@@ -142,11 +155,15 @@
     <ClInclude Include="ConsoleLogger.h" />
     <ClInclude Include="IConfiguartionFactory.h" />
     <ClInclude Include="IFrame.h" />
+    <ClInclude Include="IFrameHandler.h" />
     <ClInclude Include="IFrameHandlerFactory.h" />
     <ClInclude Include="ILogger.h" />
     <ClInclude Include="IVideoProcessor.h" />
     <ClInclude Include="IVideoProcessorFactory.h" />
     <ClInclude Include="IWritterFactory.h" />
+    <ClInclude Include="OpenCvFrame.h" />
+    <ClInclude Include="SingleMarkFrameHandler.h" />
+    <ClInclude Include="SingleMarkFrameHandlerFactory.h" />
     <ClInclude Include="VideoProcessorOpenCV.h" />
     <ClInclude Include="VideoProcessorFactory.h" />
   </ItemGroup>

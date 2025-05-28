@@ -1,12 +1,16 @@
 #pragma once
 
+#include "IFrameHandler.h"
+
+#include <memory>
+
 
 class IFrameHandlerFactory
 {
 public:
 	IFrameHandlerFactory() = default;
-	virtual ~IFrameHandlerFactory() = 0;
+	virtual ~IFrameHandlerFactory() = default;
 
-	virtual IFrameHandlerFactory makeSvc() = 0;
+	virtual std::unique_ptr<IFrameHandler> makeSvc() = 0;
 };
 

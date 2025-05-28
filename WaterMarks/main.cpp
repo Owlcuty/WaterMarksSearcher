@@ -3,6 +3,9 @@
 #include "Application.h"
 #include "ConsoleLogger.h"
 
+#include "VideoProcessorFactory.h"
+#include "SingleMarkFrameHandlerFactory.h"
+
 
 int main(int argc, char** argv)
 {
@@ -13,7 +16,13 @@ int main(int argc, char** argv)
         app.set..Factory(); <->
         */
         std::shared_ptr<ILogger> logger = std::make_shared<ConsoleLogger>(ILogger::LogLevel::Debug);
-        app.setLogger(std::move(logger));
+        app.setLogger(logger);
+
+        std::unique_ptr<IVideoProcessorFactory> videoFactory = std::make_unique<VideoProcessorFactory>(logger);
+        app.setVideoProcessorFactory(std::move(videoFactory));
+
+        std::unique_ptr<IFrameHandlerFactory> frameHandlerFactory = std::make_unique<SingleMarkFrameHandlerFactory>(logger);
+
         app.run();
     }
     catch (const std::exception& ex)

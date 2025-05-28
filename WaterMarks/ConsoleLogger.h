@@ -14,7 +14,7 @@ public:
     ConsoleLogger(LogLevel level);
     ~ConsoleLogger() override;
 
-    void log(ILogger::LogLevel level, const std::string& message) override;
+    void log(ILogger::LogLevel level, const std::string& message, const std::source_location& location = std::source_location::current()) override;
 
 private:
     LogLevel _level {LogLevel::Info};

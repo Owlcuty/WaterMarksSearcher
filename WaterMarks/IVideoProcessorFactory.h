@@ -9,7 +9,7 @@ class IVideoProcessorFactory
 {
 public:
 	IVideoProcessorFactory() = default;
-	virtual ~IVideoProcessorFactory() {}
+	virtual ~IVideoProcessorFactory() = default;
 
 	virtual std::unique_ptr<IVideoProcessor> makeSvc() = 0;
 };

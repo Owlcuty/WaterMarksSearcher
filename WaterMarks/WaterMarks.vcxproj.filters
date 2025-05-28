@@ -25,6 +25,18 @@
     <Filter Include="Исходные файлы\VideoProcessor">
       <UniqueIdentifier>{1a74be40-f60b-4fdb-98b6-94e33b72bb01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\FrameHandler">
+      <UniqueIdentifier>{b25b1f8e-84ca-43de-b154-ac2f783e8bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\FrameHandler">
+      <UniqueIdentifier>{8223189c-3d51-4903-aabf-a3c971571ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Frame">
+      <UniqueIdentifier>{358a93ea-20b0-491a-aafd-dacb49c7086a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Frame">
+      <UniqueIdentifier>{7ebda382-0a49-4d9b-adef-5a4221623c1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,18 +48,27 @@
     <ClCompile Include="ConsoleLogger.cpp">
       <Filter>Исходные файлы\Logger</Filter>
     </ClCompile>
-    <ClCompile Include="VideoProcessorFactory.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="VideoProcessorOpenCV.cpp">
       <Filter>Исходные файлы\VideoProcessor</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCvFrame.cpp">
+      <Filter>Исходные файлы\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleMarkFrameHandler.cpp">
+      <Filter>Исходные файлы\FrameHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoProcessorFactory.cpp">
+      <Filter>Исходные файлы\VideoProcessor</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleMarkOpenCv.cpp">
+      <Filter>Исходные файлы\FrameHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleMarkFrameHandlerFactory.cpp">
+      <Filter>Исходные файлы\FrameHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IFrameHandlerFactory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IWritterFactory.h">
@@ -68,14 +89,29 @@
     <ClInclude Include="ILogger.h">
       <Filter>Файлы заголовков\Logger</Filter>
     </ClInclude>
+    <ClInclude Include="VideoProcessorFactory.h">
+      <Filter>Файлы заголовков\VideoProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameHandlerFactory.h">
+      <Filter>Файлы заголовков\FrameHandler</Filter>
+    </ClInclude>
     <ClInclude Include="IFrame.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameHandler.h">
+      <Filter>Файлы заголовков\FrameHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCvFrame.h">
+      <Filter>Файлы заголовков\Frame</Filter>
     </ClInclude>
     <ClInclude Include="IVideoProcessor.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\VideoProcessor</Filter>
     </ClInclude>
-    <ClInclude Include="VideoProcessorFactory.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="SingleMarkFrameHandler.h">
+      <Filter>Файлы заголовков\FrameHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleMarkFrameHandlerFactory.h">
+      <Filter>Файлы заголовков\FrameHandler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

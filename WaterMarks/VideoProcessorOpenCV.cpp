@@ -1,6 +1,7 @@
 #include "VideoProcessorOpenCV.h"
+#include "OpenCvFrame.h"
 
-#include <opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 
 VideoProcessorOpenCV::VideoProcessorOpenCV(std::shared_ptr<ILogger> logger)
@@ -11,7 +12,7 @@ VideoProcessorOpenCV::VideoProcessorOpenCV(std::shared_ptr<ILogger> logger)
 
 VideoProcessorOpenCV::~VideoProcessorOpenCV()
 {
-
+	_cap.release();
 }
 
 void VideoProcessorOpenCV::init(const std::string& videoPath)
@@ -20,9 +21,18 @@ void VideoProcessorOpenCV::init(const std::string& videoPath)
 	_openMedia();
 }
 
-std::queue<IFrame> VideoProcessorOpenCV::getFrames(std::uint32_t number)
+std::unique_ptr<IFrame> VideoProcessorOpenCV::getFrame()
 {
-	return {};
+	cv::Mat cvframe;
+	if (!_cap.read(cvframe))
+	{
+		_log(ILogger::LogLevel::Debug, "Can't read anymore");
+		return {};
+	}
+
+	std::unique_ptr<IFrame> frame = std::make_unique<OpenCvFrame>(cvframe, 0);
+
+	return frame;
 }
 
 std::uint64_t VideoProcessorOpenCV::getPosition() const
@@ -37,12 +47,13 @@ void VideoProcessorOpenCV::setPosition(std::uint64_t framePosition)
 
 bool VideoProcessorOpenCV::_openMedia()
 {
-	cv::VideoCapture cap(_path);
-	if (!cap.isOpened())  // isOpened() returns true if capturing has been initialized.
+	_cap.open(_path);
+	if (!_cap.isOpened())  // isOpened() returns true if capturing has been initialized.
 	{
 		_log(ILogger::LogLevel::Error, "Cannot open the video file. \n");
 		return false;
 	}
+	_log(ILogger::LogLevel::Info, "Openned video file");
 	return true;
 }
 

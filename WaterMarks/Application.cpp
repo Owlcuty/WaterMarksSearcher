@@ -14,6 +14,14 @@ void Application::run()
 	try
 	{
 		_logger->log(ILogger::LogLevel::Info, "Application starts running");
+
+		std::unique_ptr<IVideoProcessor> videoProcessor = _videoProcessorFactory->makeSvc();
+		videoProcessor->init("D:\\projects\\WaterMarksSearcher\\example\\videoplayback.mp4");
+		std::unique_ptr<IFrame> frame = videoProcessor->getFrame();
+
+		std::unique_ptr<IFrameHandler> frameHandler = _frameHandlerFactory->makeSvc();
+		frameHandler->init(std::move(frame));
+		frameHandler->handle();
 	}
 	catch (const std::exception& ex)
 	{

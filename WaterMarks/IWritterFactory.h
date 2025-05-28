@@ -5,7 +5,7 @@ class IWritterFactory
 {
 public:
 	IWritterFactory() = default;
-	virtual ~IWritterFactory() = 0;
+	virtual ~IWritterFactory() = default;
 
 	virtual IWritterFactory makeSvc() = 0;
 };
