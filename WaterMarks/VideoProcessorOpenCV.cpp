@@ -21,16 +21,24 @@ void VideoProcessorOpenCV::init(const std::string& videoPath)
 	_openMedia();
 }
 
+#include "Profiler.hpp"
+
 std::unique_ptr<IFrame> VideoProcessorOpenCV::getFrame()
 {
+	//PROFILE_START("CAP READ");
 	cv::Mat cvframe;
 	if (!_cap.read(cvframe))
 	{
-		_log(ILogger::LogLevel::Debug, "Can't read anymore");
+		_log(LogLevel::Debug, "Can't read anymore");
+		//PROFILE_END();
 		return {};
 	}
+	//PROFILE_END();
 
-	std::unique_ptr<IFrame> frame = std::make_unique<OpenCvFrame>(cvframe, 0);
+	//PROFILE_START("Get data and make_unique frame");
+	double timestamp_ms = _cap.get(cv::CAP_PROP_POS_MSEC);
+	std::unique_ptr<IFrame> frame = std::make_unique<OpenCvFrame>(cvframe, timestamp_ms / 1000.0);
+	//PROFILE_END();
 
 	return frame;
 }
@@ -45,19 +53,29 @@ void VideoProcessorOpenCV::setPosition(std::uint64_t framePosition)
 	_position = framePosition;
 }
 
+void VideoProcessorOpenCV::skipFrames(std::uint32_t frameSkip)
+{
+	//PROFILE_SCOPE("Skip Frames");
+	cv::Mat trashFrame;
+	for (std::uint32_t i = 0; i < frameSkip; i++)
+	{
+		_cap >> trashFrame;
+	}
+}
+
 bool VideoProcessorOpenCV::_openMedia()
 {
 	_cap.open(_path);
 	if (!_cap.isOpened())  // isOpened() returns true if capturing has been initialized.
 	{
-		_log(ILogger::LogLevel::Error, "Cannot open the video file. \n");
+		_log(LogLevel::Error, "Cannot open the video file. \n");
 		return false;
 	}
-	_log(ILogger::LogLevel::Info, "Openned video file");
+	_log(LogLevel::Info, "Openned video file");
 	return true;
 }
 
-void VideoProcessorOpenCV::_log(ILogger::LogLevel level, const std::string& message)
+void VideoProcessorOpenCV::_log(LogLevel level, const std::string& message)
 {
 	if (!_logger)
 	{

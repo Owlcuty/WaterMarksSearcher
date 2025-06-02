@@ -22,9 +22,11 @@ public:
 	std::uint64_t getPosition() const override;
 	void setPosition(std::uint64_t framePosition) override;
 
+	void skipFrames(std::uint32_t frameSkip) override;
+
 private:
 	bool _openMedia();
-	void _log(ILogger::LogLevel level, const std::string& message);
+	void _log(LogLevel level, const std::string& message);
 
 private:
 	cv::VideoCapture _cap {};

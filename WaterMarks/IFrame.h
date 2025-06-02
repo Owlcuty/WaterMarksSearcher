@@ -16,5 +16,5 @@ public:
 		return static_cast<const FrameType*>(this)->getImpl();
 	}
 
-	virtual std::uint64_t getTime() const = 0;
+	virtual double getTime() const = 0;
 };

@@ -8,14 +8,15 @@
 class OpenCvFrame : public IFrame
 {
 public:
-	OpenCvFrame(cv::Mat frame, std::uint64_t time);
+	OpenCvFrame(cv::Mat frame, double time);
+	OpenCvFrame(std::string filepath);
 	~OpenCvFrame() = default;
 
 	std::optional<cv::Mat> getImpl() const;
 
-	std::uint64_t getTime() const override;
+	double getTime() const override;
 
 private:
 	cv::Mat _frame;
-	std::uint64_t _time;
+	double _time {0};
 };

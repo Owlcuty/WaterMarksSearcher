@@ -17,4 +17,6 @@ public:
 
 	virtual std::uint64_t getPosition() const = 0;
 	virtual void setPosition(std::uint64_t framePosition) = 0;
+
+	virtual void skipFrames(std::uint32_t frameSkip) = 0;
 };

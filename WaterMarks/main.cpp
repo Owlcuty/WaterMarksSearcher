@@ -1,27 +1,54 @@
 #include <iostream>
 
 #include "Application.h"
+
 #include "ConsoleLogger.h"
+#include "FileLogger.h"
+
+#include "JsonConfiguration.h"
 
 #include "VideoProcessorFactory.h"
 #include "SingleMarkFrameHandlerFactory.h"
 
 
+void makeLogger(const ConfigData& configData, std::shared_ptr<ILogger> logger)
+{
+    switch (configData.log.method)
+    {
+    case LogMethod::Console:
+        logger = std::make_shared<ConsoleLogger>(configData.log.level);
+        break;
+    case LogMethod::File:
+        logger = std::make_shared<FileLogger>(configData.log.path, configData.log.level);
+        break;
+    default:
+        throw std::invalid_argument("Log set failed from config");
+    }
+}
+
 int main(int argc, char** argv)
 {
     try
     {
-        Application app;
-        /*
-        app.set..Factory(); <->
-        */
-        std::shared_ptr<ILogger> logger = std::make_shared<ConsoleLogger>(ILogger::LogLevel::Debug);
+        
+        JsonConfiguration config{};
+        config.init("D:\\tempWM\\config.json");
+        ConfigData configData = config.getData();
+
+        Application app {configData};
+        
+        std::shared_ptr<ILogger> logger{};
+
+        makeLogger(configData, logger);
         app.setLogger(logger);
+
+        std::shared_ptr<WatermarkDetector> detector = std::make_shared<WatermarkDetector>(configData.modelPath);
 
         std::unique_ptr<IVideoProcessorFactory> videoFactory = std::make_unique<VideoProcessorFactory>(logger);
         app.setVideoProcessorFactory(std::move(videoFactory));
 
-        std::unique_ptr<IFrameHandlerFactory> frameHandlerFactory = std::make_unique<SingleMarkFrameHandlerFactory>(logger);
+        std::unique_ptr<IFrameHandlerFactory> frameHandlerFactory = std::make_unique<SingleMarkFrameHandlerFactory<OpenCvFrame>>(logger, detector);
+        app.setFrameHandlerFactory(std::move(frameHandlerFactory));
 
         app.run();
     }

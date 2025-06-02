@@ -1,10 +1,15 @@
 #include "OpenCvFrame.h"
 
-OpenCvFrame::OpenCvFrame(cv::Mat frame, std::uint64_t time)
+OpenCvFrame::OpenCvFrame(cv::Mat frame, double time)
 	: _frame(frame)
 	, _time(time)
 {
 
+}
+
+OpenCvFrame::OpenCvFrame(std::string filepath)
+{
+	_frame = cv::imread(filepath);
 }
 
 std::optional<cv::Mat> OpenCvFrame::getImpl() const
@@ -12,7 +17,7 @@ std::optional<cv::Mat> OpenCvFrame::getImpl() const
 	return _frame;
 }
 
-std::uint64_t OpenCvFrame::getTime() const
+double OpenCvFrame::getTime() const
 {
 	return _time;
 }

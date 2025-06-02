@@ -9,6 +9,6 @@ class IFrameHandler
 {
 public:
 	virtual ~IFrameHandler() = default;
-	virtual void init(std::unique_ptr<IFrame> frame) = 0;
-	virtual void handle() = 0;
+	virtual void setFrame(std::unique_ptr<IFrame> frame) = 0;
+	virtual bool handle() = 0;
 };

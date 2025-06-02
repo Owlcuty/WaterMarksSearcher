@@ -1,0 +1,13 @@
+{
+  "modelPath": "D:\\projects\\model",
+  "videoPath": "D:\\projects\\WaterMarksSearcher\\example\\videoplayback.mp4",
+  "log": {
+    "method": "File",
+    "level":  "Info",
+    "path": "D:\\logs\\WaterMark.log"
+  },
+  "writer": {
+    "method": "Console",
+    "path": ""
+  }
+}
