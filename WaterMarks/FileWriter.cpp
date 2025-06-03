@@ -68,26 +68,23 @@ void FileWriter::_log(LogLevel level, const std::string& message)
     _logger->log(level, message);
 }
 
-std::string FileWriter::_formatTime(double timestamp) const
+std::string FileWriter::_formatTime(double seconds) const
 {
-    // Преобразуем double (секунды) в time_t
-    time_t time = static_cast<time_t>(timestamp);
+    // Получаем целую часть секунд
+    int total_seconds = static_cast<int>(seconds);
 
-    // Получаем оставшиеся миллисекунды
-    double milliseconds = (timestamp - time) * 1000;
+    // Вычисляем часы, минуты и секунды
+    int hours = total_seconds / 3600;
+    int minutes = (total_seconds % 3600) / 60;
+    int secs = total_seconds % 60;
 
-    // Конвертируем в локальное время
-    struct tm localTime;
-    localtime_s(&localTime, &time);
+    // Форматируем строку
+    std::ostringstream oss;
+    oss << std::setfill('0') << std::setw(2) << hours << ":"
+        << std::setfill('0') << std::setw(2) << minutes << ":"
+        << std::setfill('0') << std::setw(2) << secs;
 
-    // Форматируем время
-    std::stringstream ss;
-    ss << std::setfill('0')
-        << std::setw(2) << localTime.tm_hour << ":"
-        << std::setw(2) << localTime.tm_min << ":"
-        << std::setw(2) << localTime.tm_sec;
-
-    return ss.str();
+    return oss.str();
 }
 
 void FileWriter::_writeToFile(const std::string& content)

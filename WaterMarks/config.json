@@ -7,7 +7,7 @@
     "path": "D:\\logs\\WaterMark.log"
   },
   "writer": {
-    "method": "Console",
-    "path": ""
+    "method": "File",
+    "path": "D:\\logs\\result.log"
   }
 }

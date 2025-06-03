@@ -17,7 +17,7 @@ namespace
     class WatermarkDetector {
     public:
         WatermarkDetector(const std::string& modelPath);
-        bool containsWatermark(const cv::Mat& frame, float threshold = 0.85f);
+        bool containsWatermark(const cv::Mat& frame, std::shared_ptr<ILogger> logger, float threshold = 0.97f);
 
     private:
         cv::Mat _preprocessImage(const cv::Mat& img) const;
@@ -41,7 +41,7 @@ namespace
         }
     }
 
-    bool WatermarkDetector::containsWatermark(const cv::Mat& frame, float threshold) {
+    bool WatermarkDetector::containsWatermark(const cv::Mat& frame, std::shared_ptr<ILogger> logger, float threshold) {
         cv::Mat input = _preprocessImage(frame);
 
         cv::Mat blob = cv::dnn::blobFromImage(
@@ -56,7 +56,7 @@ namespace
         if (prob > threshold)
         {
             cv::imwrite(std::string("D:\\tmpFrames\\freame_") + std::to_string(prob) + ".png", frame);
-            std::cout << "Probability: " << prob << std::endl;
+            logger->log(LogLevel::Info, std::string("Probability: ") + std::to_string(prob));
         }
 
         return prob > threshold;
@@ -161,7 +161,7 @@ public:
         }
 
         cv::Mat frame = _frame->get<OpenCvFrame>().value();
-        return _detector->containsWatermark(frame);
+        return _detector->containsWatermark(frame, _logger);
 
         return false;
         if (_hasTemplate)
