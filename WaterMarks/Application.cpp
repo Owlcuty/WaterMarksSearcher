@@ -37,8 +37,11 @@ void Application::run()
 		}
 		videoProcessor->init(_configData.videoPath);
 		const std::int32_t chunkSize = 128;
-		std::vector<std::unique_ptr<IFrame>> frames(chunkSize);
+		std::vector<std::shared_ptr<IFrame>> frames(chunkSize);
 		std::int32_t frameIdx = 0;
+		
+		std::unique_ptr<IWriter> writer = _writerFactory->makeSvc();
+
 		while (1)
 		{
 			//PROFILE_START("Get frame");
@@ -72,10 +75,11 @@ void Application::run()
 					throw "Factory couldn't make frame handler";
 				}
 				double time = frames[idx]->getTime();
-				frameHandler->setFrame(std::move(frames[idx]));
+				frameHandler->setFrame(frames[idx]);
 				bool gotMark = frameHandler->handle();
 				if (gotMark)
 				{
+					writer->add(frames[idx]);
 					std::string msg = "Time of watermark: " + std::to_string(static_cast<int>(time) / 60) + ":" + std::to_string(time - static_cast<int>(time) / 60 * 60);
 					_logger->log(LogLevel::Info, msg);
 				}
@@ -84,6 +88,7 @@ void Application::run()
 			PROFILE_PRINT();
 			frameIdx = 0;
 		}
+		writer->commit();
 	}
 	catch (const std::exception& ex)
 	{

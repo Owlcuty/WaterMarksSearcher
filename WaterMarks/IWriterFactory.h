@@ -1,5 +1,9 @@
 #pragma once
 
+#include "IWriter.h"
+
+#include <memory>
+
 
 class IWriterFactory
 {
@@ -7,6 +11,6 @@ public:
 	IWriterFactory() = default;
 	virtual ~IWriterFactory() = default;
 
-	virtual IWriterFactory makeSvc() = 0;
+	virtual std::unique_ptr<IWriter> makeSvc() = 0;
 };
 

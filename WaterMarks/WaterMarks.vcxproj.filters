@@ -37,6 +37,18 @@
     <Filter Include="Файлы заголовков\Frame">
       <UniqueIdentifier>{7ebda382-0a49-4d9b-adef-5a4221623c1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Configuration">
+      <UniqueIdentifier>{f46fb2da-5b9c-41f3-976e-803a7b651635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Writer">
+      <UniqueIdentifier>{942b64d2-50f4-4653-be78-7e2813ffa874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Configuration">
+      <UniqueIdentifier>{b28c152d-d6f1-487d-a0a2-66b8cdee6ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Writer">
+      <UniqueIdentifier>{7f6d621b-2f2e-49ee-b6b6-54e59e4e2996}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,21 +72,27 @@
     <ClCompile Include="VideoProcessorFactory.cpp">
       <Filter>Исходные файлы\VideoProcessor</Filter>
     </ClCompile>
-    <ClCompile Include="SingleMarkOpenCv.cpp">
-      <Filter>Исходные файлы\FrameHandler</Filter>
-    </ClCompile>
     <ClCompile Include="SingleMarkFrameHandlerFactory.cpp">
       <Filter>Исходные файлы\FrameHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="FileWriter.h">
+      <Filter>Файлы заголовков\Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLogger.cpp">
+      <Filter>Исходные файлы\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="FileWriter.cpp">
+      <Filter>Исходные файлы\Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonConfiguration.cpp">
+      <Filter>Исходные файлы\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="FileWriterFactory.cpp">
+      <Filter>Исходные файлы\Writer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IWritterFactory.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IConfiguartionFactory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IVideoProcessorFactory.h">
@@ -113,5 +131,30 @@
     <ClInclude Include="SingleMarkFrameHandlerFactory.h">
       <Filter>Файлы заголовков\FrameHandler</Filter>
     </ClInclude>
+    <ClInclude Include="IWriter.h">
+      <Filter>Файлы заголовков\Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiler.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IWriterFactory.h">
+      <Filter>Файлы заголовков\Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="IConfiguration.h">
+      <Filter>Файлы заголовков\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonConfiguration.h">
+      <Filter>Файлы заголовков\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLogger.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWriterFactory.h">
+      <Filter>Файлы заголовков\Writer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="config.json" />
   </ItemGroup>
 </Project>

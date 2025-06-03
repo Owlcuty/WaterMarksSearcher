@@ -34,7 +34,7 @@ void FileWriter::add(const std::string& message)
     needsCommit_ = true;
 }
 
-void FileWriter::add(std::unique_ptr<IFrame> frame)
+void FileWriter::add(std::shared_ptr<IFrame> frame)
 {
     std::lock_guard<std::mutex> lock(writeMutex_);
 
@@ -52,6 +52,20 @@ void FileWriter::commit()
         outputFile_.flush();
     }
     needsCommit_ = false;
+}
+
+void FileWriter::setLogger(std::shared_ptr<ILogger> logger)
+{
+    _logger = logger;
+}
+
+void FileWriter::_log(LogLevel level, const std::string& message)
+{
+    if (!_logger)
+    {
+        return;
+    }
+    _logger->log(level, message);
 }
 
 std::string FileWriter::_formatTime(double timestamp) const

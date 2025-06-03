@@ -102,9 +102,9 @@ public:
         return false;
     }
 
-    void setFrame(std::unique_ptr<IFrame> frame) override
+    void setFrame(std::shared_ptr<IFrame> frame) override
     {
-        _frame = std::move(frame);
+        _frame = frame;
     }
 
 private:
@@ -122,7 +122,7 @@ private:
     }
 
 private:
-    std::unique_ptr<IFrame> _frame;
+    std::shared_ptr<IFrame> _frame;
     std::shared_ptr<ILogger> _logger{};
     std::shared_ptr<WatermarkDetector> _detector{};
 };
@@ -173,7 +173,7 @@ public:
 
     }
 
-    void setFrame(std::unique_ptr<IFrame> frame) override
+    void setFrame(std::shared_ptr<IFrame> frame) override
     {
         _frame = std::move(frame);
 
@@ -266,7 +266,7 @@ private:
     }
 
 private:
-    std::unique_ptr<IFrame> _frame;
+    std::shared_ptr<IFrame> _frame;
 
     bool _hasTemplate {false};
     cv::Mat _waterMark;

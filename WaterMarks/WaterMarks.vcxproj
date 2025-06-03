@@ -143,6 +143,7 @@
     <ClCompile Include="FileLogger.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="FileWriter.h" />
+    <ClCompile Include="FileWriterFactory.cpp" />
     <ClCompile Include="JsonConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenCvFrame.cpp" />
@@ -157,6 +158,7 @@
     </ClInclude>
     <ClInclude Include="ConsoleLogger.h" />
     <ClInclude Include="FileLogger.h" />
+    <ClInclude Include="FileWriterFactory.h" />
     <ClInclude Include="IConfiguration.h" />
     <ClInclude Include="IFrame.h" />
     <ClInclude Include="IFrameHandler.h" />

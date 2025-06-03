@@ -10,8 +10,10 @@
 #include "VideoProcessorFactory.h"
 #include "SingleMarkFrameHandlerFactory.h"
 
+#include "FileWriterFactory.h"
 
-void makeLogger(const ConfigData& configData, std::shared_ptr<ILogger> logger)
+
+void makeLogger(const ConfigData& configData, std::shared_ptr<ILogger>& logger)
 {
     switch (configData.log.method)
     {
@@ -23,6 +25,18 @@ void makeLogger(const ConfigData& configData, std::shared_ptr<ILogger> logger)
         break;
     default:
         throw std::invalid_argument("Log set failed from config");
+    }
+}
+
+void makeWriter(const ConfigData& configData, std::unique_ptr<IWriterFactory>& factory, std::shared_ptr<ILogger> logger)
+{
+    switch (configData.writer.method)
+    {
+    case WriterMethod::File:
+        factory = std::make_unique<FileWriterFactory>(configData.writer.path, logger);
+        break;
+    default:
+        throw std::invalid_argument("Writer set failed from config");
     }
 }
 
@@ -41,6 +55,10 @@ int main(int argc, char** argv)
 
         makeLogger(configData, logger);
         app.setLogger(logger);
+
+        std::unique_ptr<IWriterFactory> writerFactory{};
+        makeWriter(configData, writerFactory, logger);
+        app.setWriterFactory(std::move(writerFactory));
 
         std::shared_ptr<WatermarkDetector> detector = std::make_shared<WatermarkDetector>(configData.modelPath);
 
